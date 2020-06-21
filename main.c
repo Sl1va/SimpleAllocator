@@ -145,7 +145,7 @@ void memory_check(void){
                     current_header.block_size, current_header.capacity, current_header.is_reserved);
 }
 
-void test(){
+void test1(){
     char* a = e_malloc(30);
     char* b = e_malloc(40);
     char* c = e_malloc(50);
@@ -158,16 +158,34 @@ void test(){
     e_free(d);
 }
 
-int main(){
-    test();
-    free(memory);
+void test2(){
+    char* a = e_malloc(30);
+    for (int i = 0; i < 10; i++){
+        a[i] = 'a' + i;
+    }
+    for (int i = 0; i < 10; i++){
+        printf("%c", a[i]);
+    }
+    printf("\n\n");
+
+    char* b = e_malloc(30);
+    e_free(a);
+    e_free(b);
+    memory_check();
+    char* d = e_malloc(29);
+    memory_check();
+    e_free(d);
+    
 }
 
+int main(){
+    test1();
 
-/*
-                            TODO
-    -create block after current, to find it in next e_malloc          | [+]
-    -check memory limits                                              | []
-    -merge nearby free blocks                                         | [+]
-    -memory_check                                                     | [+]
-*/
+    // this to lines to run
+    // 2 independent tests
+    free(memory);
+    memory = NULL;
+    
+    test2();
+    free(memory);
+}
