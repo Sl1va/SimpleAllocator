@@ -181,7 +181,7 @@ void test2(){
 int main(){
     test1();
 
-    // this to lines to run
+    // this lines to run
     // 2 independent tests
     free(memory);
     memory = NULL;
